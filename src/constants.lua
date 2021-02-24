@@ -36,8 +36,18 @@ TILE_SETS = TILE_SETS_WIDE * TILE_SETS_TALL
 -- player walking speed
 PLAYER_WALK_SPEED = 60
 
+-- ICON SIZE
+ICON_SIZE = 32
+
+--Button Size
+buttonWidth = VIRTUAL_WIDTH - 100
+buttonHeight = 20
+
+-- Cloud Properties for Spawning
+CLOUD_GAP = 50
+
 -- player jumping velocity
-PLAYER_JUMP_VELOCITY = -70
+PLAYER_JUMP_VELOCITY = -100
 
 TILE_ID_EMPTY = 5
 TILE_ID_GROUND = 3
@@ -51,8 +61,8 @@ COLLIDABLE_TILES = {
     TILE_ID_GROUND
 }
 
-
-CLOUD_SCROLL = 40
-
-cloudWidth = 16
-cloudHeight = 16
+-- player's score
+score = 0
+currentScore = 0
+highScore = 0
+highScoreList = {currentScore, highScore}

@@ -14,12 +14,21 @@ function love.load()
     gStateMachine = StateMachine{
         ['title'] = function() return TitleScreenState() end,
         ['play'] = function () return PlayState() end,
-        ['settings'] = function() return SettingState() end,
-        ['changeAvatar'] = function() return ChangeState() end
+        ['settings'] = function() return SettingScreenState() end,
+        ['changeAvatar'] = function() return ChangeScreenState() end,
+        ['gameOver'] = function() return GameOverState() end,
     }
     gStateMachine:change('title')
 
     love.keyboard.keysPressed = {}
+
+    love.mouse.mousepressed = {}
+
+    mousePosition = {['x'] = nil, ['y'] = nil}
+
+    main_music = gAudio['main']
+    main_music:setLooping(true)
+    main_music:play()
 end
 
 function love.resize(w, h)
@@ -38,10 +47,22 @@ function love.keyboard.wasPressed(key)
     end
 end
 
+function love.mousepressed(x, y, button, istoush, presses)
+    love.mouse.mousepressed[button] = true
+end
+
 function love.update(dt)
+
     backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
     
+    mouseX = love.mouse.getX()
+    mouseY = love.mouse.getY()
+
+    mousePosition.x, mousePosition.y = push:toGame(mouseX, mouseY)
+
     gStateMachine:update(dt)
+
+    love.mouse.mousepressed = {}
 
     love.keyboard.keysPressed = {}
 end
@@ -56,4 +77,8 @@ function love.draw()
     gStateMachine:render()
 
     push:finish()
+end
+
+function distanceBetween(x1, y1)
+    return math.sqrt((mousePosition.x - x1) ^ 2 + (mousePosition.y - y1) ^ 2)
 end
