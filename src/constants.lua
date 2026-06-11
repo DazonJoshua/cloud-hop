@@ -34,7 +34,7 @@ TOPPER_SETS = TOPPER_SETS_WIDE * TOPPER_SETS_TALL
 TILE_SETS = TILE_SETS_WIDE * TILE_SETS_TALL
 
 -- player walking speed
-PLAYER_WALK_SPEED = 60
+PLAYER_WALK_SPEED = 80
 
 -- ICON SIZE
 ICON_SIZE = 32
@@ -44,16 +44,20 @@ buttonWidth = VIRTUAL_WIDTH - 100
 buttonHeight = 20
 
 -- Cloud Properties for Spawning
-CLOUD_GAP = 50
+CLOUD_GAP = 100
 
 -- player jumping velocity
-PLAYER_JUMP_VELOCITY = -100
+PLAYER_JUMP_VELOCITY = -350
 
 TILE_ID_EMPTY = 5
 TILE_ID_GROUND = 3
 
 player = { 
     1, 2, 3, 4, 5
+}
+
+fruits = {
+    1, 2, 3, 4, 5, 6, 7
 }
 
 -- table of tiles that should trigger a collision

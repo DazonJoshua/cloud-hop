@@ -26,18 +26,17 @@ function PlayerJumpState:update(dt)
     -- go into the falling state when y velocity is positive
     if self.player.dy >= 0 then
         self.player:changeState('falling')
-    end
-
-    self.player.y = self.player.y + (self.player.dy * dt)
-
+        self.player.y = self.player.y + (self.player.dy * dt)
     -- else test our sides for blocks
-    if love.keyboard.isDown('left') then
+    elseif love.keyboard.isDown('left') then
         self.player.direction = 'left'
-        self.player.x = self.player.x - PLAYER_WALK_SPEED * dt
-        self.player:checkObjectCollisions()
+        self.player.x = math.max(2, self.player.x - PLAYER_WALK_SPEED * dt)
+        --self.player:checkObjectCollisions()
+        self.player:checkLeftCollisions(dt)
     elseif love.keyboard.isDown('right') then
         self.player.direction = 'right'
-        self.player.x = self.player.x + PLAYER_WALK_SPEED * dt
-        self.player:checkObjectCollisions()
+        self.player.x = math.min(VIRTUAL_WIDTH - 20, self.player.x + PLAYER_WALK_SPEED * dt)
+        --self.player:checkObjectCollisions()
+        self.player:checkRightCollisions(dt)
     end
 end
